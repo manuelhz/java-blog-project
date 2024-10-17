@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head}"></head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="51">
+    <nav th:replace="~{fragments/nav :: nav}"></nav>
+
+
+    
+
+
+<!-- Header Start -->
+<div class="container-fluid bg-primary d-flex align-items-center mb-5 py-5" id="home" style="min-height: 100vh;">
+    <div class="container">
+        <div class="row align-items-center text-center ">
+            <div class="col-lg-5 px-5 pl-lg-0 pb-5 pb-lg-0">
+                <img class="img-fluid w-75 rounded-circle shadow-sm" src="img/profile.jpg" alt="">
+            </div>
+            <div class="col-lg-7 text-center text-lg-left">
+                <h3 class="text-white font-weight-normal mb-3">I'm</h3>
+                <h1 class="display-3 text-uppercase text-primary mb-2" style="-webkit-text-stroke: 2px #ffffff;">Manuel Hernandez Zemljic</h1>
+                <h1 class="typed-text-output d-inline font-weight-lighter text-white"></h1>
+                <div class="typed-text d-none">Java Software Engineer, Machine Learning Engineer, Data Analyst, Supply Chain Analyst</div>                
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
+
+
+    <!-- About Start -->
+    <div class="container-fluid py-5" id="about">
+        <div class="container">
+            <div class="position-relative d-flex align-items-center justify-content-center">
+                <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">About</h1>
+                <h1 class="position-absolute text-uppercase text-primary">About Me</h1>
+            </div>
+            <div class="row align-items-center text-center">
+                <div class="col-lg-5 pb-4 pb-lg-0">
+                    <img class="img-fluid rounded w-75" src="img/about.jpg" alt="">
+                </div>
+                <div class="col-lg-7">
+                    <h3 class="mb-4">Profile</h3>
+                    <p  class="text-justify">Experienced Software Engineer with Expertise in Java Full Stack Development, Machine Learning, and Supply Chain Analysis | Leveraging Background in Industrial Engineering and Data Science to Drive Business Success.</p>
+                    <p  class="text-justify">I am a highly skilled and experienced individual with a background in Industrial Engineering and Data Science. I am passionate about technology and have a strong proficiency in Java Full Stack Development, including Spring Boot REST APIs, Bootstrap templates, and AJAX web clients.</p>
+                    <p  class="text-justify">In addition to my technical skills, I also have experience in data analysis using Python, machine learning algorithms such as regression, classification, time series, NLP, and computer vision. I have previous experience with Excel and SQL data analysis, as well as developing web dashboards and databases using PHP.</p>
+                    <p  class="text-justify">My previous work experience includes leading the ERP implementation and process improvement for a small logistics company, where I developed SQL queries for various departments such as finances, sales, warehouse, and purchases. I also have a background in business management, supply chain, finances, marketing, and economics.</p>
+                    <div class="row mb-3">
+                        <div class="col-sm-6 py-2"><h6>Name: <span class="text-secondary">Manuel Hernandez Zemljic</span></h6></div>
+                        <div class="col-sm-6 py-2"><h6>Degree: <span class="text-secondary">Master</span></h6></div>
+                        <div class="col-sm-6 py-2"><h6>Resides: <span class="text-secondary">Nottingham, United Kingdom</span></h6></div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+
+ <!-- Qualification Start -->
+ <div class="container-fluid py-5" id="qualification" style = "overflow: hidden;">
+    <div class="container">
+        <div class="position-relative d-flex align-items-center justify-content-center flex-wrap col">
+            <h1 class="display-t text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">Education</h1>
+            <h1 class="position-absolute text-uppercase text-primary">Education</h1>
+        </div>
+        <div class="row align-items-center">
+            <div class="col-sm-12">
+                <h3 class="mb-4">My Education</h3>
+                <div class="border-left border-primary pt-2 pl-4 ml-2">
+                    <div class="position-relative mb-4">
+                        <i class="far fa-dot-circle text-primary position-absolute" style="top: 2px; left: -32px;"></i>
+                        <h5 class="font-weight-bold mb-1">Master of science MSC Data Science, Mathematics and Computer Science</h5>
+                        <p class="mb-2"><strong>University of Nottingham</strong> | <small>2021 - 2022</small></p>
+                        <p  class="text-justify">My MSc in Data Science from the University of Nottingham provided me with a comprehensive education in computer science and mathematics. In computer science, I studied programming, machine learning, and data modelling, while in mathematics, I focused on statistics, time series forecasting, and multivariate analysis. Through a variety of projects, I gained practical experience in applying classification and regression techniques on UCI datasets using algorithms such as ANN, Decision Trees, and SVM. I also worked on projects involving supervised and unsupervised learning on the Sloan Digital Sky Survey (SDSS) DR14 dataset, time series analysis and forecasting on environmental datasets, and semantic segmentation of medical MRI images using deep learning methods.</p>
+                    </div>
+                    <div class="position-relative mb-4">
+                        <i class="far fa-dot-circle text-primary position-absolute" style="top: 2px; left: -32px;"></i>
+                        <h5 class="font-weight-bold mb-1">Bachelor's degree, Industrial Engineering</h5>
+                        <p class="mb-2"><strong>Universidad Católica de la Santísima Concepción</strong> | <small>2004 - 2009</small></p>
+                        <p  class="text-justify">My Bachelor of Science in Industrial Engineering provided me with a comprehensive education in business and engineering concepts. I completed modules in operations research, simulation, business strategy, project management, supply chain management, marketing, finance, and accounting, as well as engineering modules in physics, chemistry, thermodynamics, mathematics, fluid mechanics, and electrotechnics. Through hands-on projects such as designing an industrial refrigeration system for a blueberry plant and implementing a continuous improvement system for a ceramic factory, I gained practical experience in problem-solving and process optimization. This background has equipped me with a diverse skill set that is valuable for roles requiring analytical thinking and data-driven decision-making.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Qualification End -->
+    
+
+
+    <!-- Experience Start -->
+    <div class="container-fluid py-5" id="experience">
+        <div class="container">
+            <div class="position-relative d-flex align-items-center justify-content-center">
+                <h1 class="display-y text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6; ">Expericence</h1>
+                <h1 class="position-absolute text-uppercase text-primary">My Expericence</h1>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-sm-12">
+                    <h3 class="mb-4">My Expericence</h3>
+                    <div class="border-left border-primary pt-2 pl-4 ml-2">
+                        <div class="position-relative mb-4">
+                            <i class="far fa-dot-circle text-primary position-absolute" style="top: 2px; left: -32px;"></i>
+                            <h5 class="font-weight-bold mb-1">Operative</h5>
+                            <p class="mb-2"><strong>ADDO Food Group LTD</strong> | <small>Jan 2023 – Present</small></p>
+                            <p  class="text-justify">I focused on ensuring accuracy in inventory management by reconciling physical stock with database records using Excel. I was involved in inbound operations, monitored picking processes, operated the jelly injection machine in post-oven procedures, and maintained the smooth flow of operations on the production line. Additionally, I upheld general quality standards to support efficient business operations.</p>
+                        </div>
+                        <div class="position-relative mb-4">
+                            <i class="far fa-dot-circle text-primary position-absolute" style="top: 2px; left: -32px;"></i>
+                            <h5 class="font-weight-bold mb-1">Warehouse Operative</h5>
+                            <p class="mb-2"><strong>Marks And Spencer</strong> | <small>Nov 2018 – Dec 2019</small></p>
+                            <p  class="text-justify">In my role as a warehouse operative, I performed a variety of tasks across three key functions: Automated Picking, Packing, and Operations Support.</p>
+                            <ul>
+                                <li>Automated Picking: Involved retrieving and assembling specific quantities of items to fulfil customer orders efficiently.</li>
+                                <li>Packing: Included packaging products securely for distribution, labelling them for easy identification.</li>
+                                <li>Operations Support: Conducted inventory analysis, summarized customer order information, and managed stock flow to ensure smooth operations.</li>
+                            </ul>
+                            <p  class="text-justify">These responsibilities required attention to detail, organization, and the ability to work effectively within a warehouse environment while supporting overall business operations.</p>
+                        </div>
+                        <div class="position-relative mb-4">
+                            <i class="far fa-dot-circle text-primary position-absolute" style="top: 2px; left: -32px;"></i>
+                            <h5 class="font-weight-bold mb-1">Supply Chain Analyst</h5>
+                            <p class="mb-2"><strong>Food-Pack Chile, Santiago Metropolitan Region, Chile </strong> | <small>Apr 2016 - Jan 2018</small></p>
+                            <p  class="text-justify">I analyzed and interpreted data to provide valuable insights to the managerial team. I developed and presented findings that drove key business decisions and policy changes. Additionally, I conducted Master Data Management to ensure data accuracy and consistency within the supply chain processes. My contributions helped optimize operational efficiency and enhance overall supply chain performance.</p>
+                        </div>
+                        <div class="position-relative mb-4">
+                            <i class="far fa-dot-circle text-primary position-absolute" style="top: 2px; left: -32px;"></i>
+                            <h5 class="font-weight-bold mb-1">Project Manager - SAP Business One Implementation</h5>
+                            <p class="mb-2"><strong>Food-Pack Chile, Santiago Metropolitan Region, Chile </strong>
+                                 | <small>Feb 2015 - Mar 2016</small></p>
+                            <p  class="text-justify">I led the successful implementation of SAP Business One software within the company. I managed the integration of databases, hardware, and servers for the new system, ensuring a seamless transition. Additionally, I oversaw the successful implementation and adoption of SAP Business One, driving efficiency and productivity within the organization.</p>
+                        </div>
+                        <div class="position-relative mb-4">
+                            <i class="far fa-dot-circle text-primary position-absolute" style="top: 2px; left: -32px;"></i>
+                            <h5 class="font-weight-bold mb-1">Process Improvement Manager</h5>
+                            <p class="mb-2"><strong>Food-Pack Chile, Santiago Metropolitan Region, Chile</strong> 
+                                | <small>Jan 2014 - Jan 2015</small></p>
+                            <p class="text-justify">I designed and implemented process flow models for sales, picking, packing, dispatch, and payment processes. I utilized technology to optimize process efficiency and workflow, leading to streamlined operations. Collaborating closely with department managers, I identified opportunities for enhancement and successfully implemented process improvements throughout the organization. My efforts resulted in increased productivity, cost savings, and overall operational effectiveness.</p>
+                        </div>
+                        <div class="position-relative mb-4">
+                            <i class="far fa-dot-circle text-primary position-absolute" style="top: 2px; left: -32px;"></i>
+                            <h5 class="font-weight-bold mb-1">Marketing Data Analyst</h5>
+                            <p class="mb-2"><strong>Food-Pack Chile, Santiago Metropolitan Region, Chile</strong> 
+                                | <small>Mar 2011 - Dec 2013</small></p>
+                            <p  class="text-justify">I developed web software for data visualization, analysis, and reporting on key performance indicators (KPIs) for company processes. I collaborated with department managers to enhance process efficiency and streamline operations. Utilizing technologies such as PHP, CSS, JavaScript, jQuery, HTML, and MSSQL, I implemented user control and reporting functionalities. Additionally, I managed technology implementations, including ERP software, databases, hardware, servers, and routers, to support data analysis and reporting needs. My efforts contributed to improved data-driven decision-making and operational effectiveness within the organization.</p>
+                        </div>
+                        <div class="position-relative mb-4">
+                            <i class="far fa-dot-circle text-primary position-absolute" style="top: 2px; left: -32px;"></i>
+                            <h5 class="font-weight-bold mb-1">Business Controller</h5>
+                            <p class="mb-2"><strong>Grupo Errazuriz - Chile</strong> 
+                                | <small>Aug 2009 - Jan 2011</small></p>
+                            <p  class="text-justify">As a business controller, I leveraged my advanced Microsoft Excel skills to generate insightful reports using pivot tables, VLOOKUP, and other Excel functions. I was responsible for creating yearly and monthly budgets, presenting results and budget variances to stakeholders, and preparing management information from raw data sources. Additionally, I developed reports on a regular basis, including weekly, monthly, and annual reports to support informed decision-making and strategic planning.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Experience End -->
+
+<!-- Skill Start -->
+<div class="container-fluid py-5" id="skill">
+    <div class="container">
+        <div class="position-relative d-flex align-items-center justify-content-center">
+            <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">Skills</h1>
+            <h1 class="position-absolute text-uppercase text-primary">My Skills</h1>
+        </div>
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="skill mb-4">
+                    <div class="d-flex justify-content-between">
+                        <h6 class="font-weight-bold">Software Engineering (Java full Stack)</h6>
+                        <h6 class="font-weight-bold">95%</h6>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="skill mb-4">
+                    <div class="d-flex justify-content-between">
+                        <h6 class="font-weight-bold">Artificial Intelligence (Python)</h6>
+                        <h6 class="font-weight-bold">85%</h6>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="skill mb-4">
+                    <div class="d-flex justify-content-between">
+                        <h6 class="font-weight-bold">Data Analysis (Python, R, SQL, Excel, Tableau)</h6>
+                        <h6 class="font-weight-bold">60%</h6>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="skill mb-4">
+                    <div class="d-flex justify-content-between">
+                        <h6 class="font-weight-bold">Management</h6>
+                        <h6 class="font-weight-bold">30%</h6>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Skill End -->
+  
+ <!-- Portfolio Start -->
+ <div class="container-fluid pt-5 pb-3" id="portfolio">
+    <div class="container">
+        <div class="position-relative d-flex align-items-center justify-content-center">
+            <h1 class="display-t text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">Portfolio</h1>
+            <h1 class="position-absolute text-uppercase text-primary">Projects</h1>
+        </div>
+
+        <div class="position-relative mb-4">                
+            <h5 class="font-weight-bold mb-1">ByteBounty, my personal blog website</h5>
+            <p class="mb-2"><strong>ByteBounty  </strong> | <small>2024</small></p>
+            <p class="text-justify">This is my personal blog website that I developed from scratch using a purchased template built with Bootstrap
+                 and jQuery. I customized the template to meet my specific requirements and utilized Bootstrap, JavaScript and jQuery 
+                 for the front-end design.
+            </p>
+            <p class="text-justify">For the back-end development, I implemented Java 21, Spring Boot 3 as the framework and utilized MySQL for managing 
+                the database. The website offers a range of functionalities including user authentication, profile creation, editing, and deletion,
+                 post pagination, creation, editing, and deletion with a WYSIWYG editor, password reset and forgot password options, account management, 
+                 post categories and tags management.
+            </p>
+        </div>
+
+        <div class="position-relative mb-4">                
+            <h5 class="font-weight-bold mb-1">Semantic Segmentation of medical MRI image data using Deep Learning (Human placenta and brain tumour (BraTS 2020) datasets)</h5>
+            <p class="mb-2"><strong>University of Nottingham  </strong> | <small>2021 - 2022</small></p>
+            <p class="text-justify">For my Master's thesis project in Data Science, I focused on semantic segmentation of medical MRI image data, 
+                specifically targeting human placenta and brain tumor segmentation using the BraTS 2020 dataset. 
+                This research aimed to leverage the power of Deep Learning techniques for accurate and automated delineation of regions of 
+                interest in MRI images.
+            </p>
+            <p class="text-justify">The project was developed using Python programming language and PyTorch deep learning framework, running on high-performance 
+                Linux GPU servers to handle the computational complexity of training deep neural networks on large medical imaging datasets. 
+                The research involved extensive data preprocessing and model development to facilitate the segmentation of complex anatomical 
+                structures in MRI images.
+            </p>
+            <p  class="text-justify">By utilizing advanced deep learning architectures, such as U-Net, and implementing state-of-the-art segmentation algorithms, 
+                the thesis project aimed to achieve precise and reliable segmentation results for human placenta and brain tumor regions in MRI scans.
+            </p>
+        </div>
+
+        <div class="position-relative mb-4">                
+            <h5 class="font-weight-bold mb-1">Time Series analysis and forecast on Harbor Beach levels and River Nile Flow datasets</h5>
+            <p class="mb-2"><strong>University of Nottingham  </strong> | <small>2021 - 2022</small></p>
+            <p class="text-justify">This project focused on conducting time series analysis and forecasting on the Harbor Beach levels 
+                and River Nile Flow datasets using R programming language. The main objective of this project was to analyze the historical data 
+                of Harbor Beach levels and River Nile Flow to understand the underlying patterns and trends, and to develop accurate forecasting 
+                models for future predictions. Various time series techniques were applied, including ARIMA (AutoRegressive Integrated Moving Average)
+                 and SARIMA (Seasonal ARIMA) models, to capture the seasonality and trends present in the data.
+            </p>
+            <p>
+                The project also involved pre-processing the datasets, evaluating the performance of the models, 
+                Visualizations, such as time series plots and forecast plots.
+            </p>
+        </div>
+
+        <div class="position-relative mb-4">                
+            <h5 class="font-weight-bold mb-1">Classification and regression on UCI data sets (ANN, Decision Trees, SVM)</h5>
+            <p class="mb-2"><strong>University of Nottingham  </strong> | <small>2021 - 2022</small></p>
+            <p class="text-justify">Implemented artificial neural networks (ANN) using TensorFlow, developing decision trees algorithm from scratch, 
+                and utilizing Support Vector Machines (SVM) with MATLAB on two UCI datasets - one for regression and one for classification. 
+                Evaluated the models' performance through cross-validation techniques implemented manually.
+            </p>
+        </div>            
+
+        <div class="position-relative mb-4">                
+            <h5 class="font-weight-bold mb-1">Supervised and unsupervised learning techniques applied to Sloan Digital Sky Survey (SDSS) DR14 dataset</h5>
+            <p class="mb-2"><strong>University of Nottingham  </strong> | <small>2021 - 2022</small></p>
+            <p class="text-justify">Utilized R and Weka to apply supervised and unsupervised learning techniques to the 
+                Sloan Digital Sky Survey (SDSS) DR14 dataset. Conducted pre-processing, classification, and clustering tasks on the dataset. 
+                Employed machine learning algorithms for analysis and interpretation of astronomical data. Experimented with various models 
+                to classify and cluster celestial objects within the SDSS DR14 dataset for further exploration and research.
+            </p>
+        </div>
+
+        <div class="position-relative mb-4">                
+            <h5 class="font-weight-bold mb-1">Design and Optimization of an Industrial Refrigeration System for a Blast Freezer Room in a Blueberry Processing Plant</h5>
+            <p class="mb-2"><strong>Frutícola Olmué S.p.A  </strong> | <small>2005</small></p>
+            <p  class="text-justify">This project focuses on the comprehensive design and optimization of an industrial refrigeration 
+                system for a blast freezer room in a blueberry processing plant. The goal of the project is to develop an efficient and 
+                reliable refrigeration system that meets the specific requirements of preserving blueberries while maintaining 
+                high-quality standards.
+            </p>
+            <p class="text-justify">The project involves conducting detailed calculations to determine the cooling load requirements, 
+                refrigerant selection, and equipment sizing for the blast freezer room. Piping diagrams and layouts are created using AutoCAD 
+                software to visualize the system configuration, optimize the flow of refrigerant, and ensure proper distribution of cooling 
+                throughout the room.</p>
+            <p class="text-justify">Equipment selection plays a crucial role in the design process, with a focus on choosing the most suitable 
+                compressors, evaporators, condensers, and other components to ensure optimal performance and energy efficiency of the refrigeration 
+                system. The selection of equipment is based on factors such as capacity, temperature control, reliability, 
+                and maintenance requirements.</p>
+            <p class="text-justify">By integrating calculations, piping diagrams, layout design using AutoCAD, and equipment selection, 
+                this project aims to deliver a comprehensive and well-optimized industrial refrigeration system for the blast freezer room in
+                 the blueberry processing plant. The final design will be a result of meticulous planning and engineering to ensure the 
+                 preservation of blueberries at the desired temperature levels while maximizing energy efficiency and operational reliability.</p>
+
+        </div>
+
+        <div class="position-relative mb-4">                
+            <h5 class="font-weight-bold mb-1">Kaizen and Suggestion System Implementation for Process Improvement in a Ceramic Factory: A Methodology-Focused Project</h5>
+            <p class="mb-2"><strong>Fanaloza S.A.  </strong> | <small>2008 - 2009</small></p>
+            <p  class="text-justify">This project centers on the implementation of the Kaizen methodology and a suggestion system in a specific 
+                process within a ceramic factory to drive continuous improvement and enhance operational efficiency. The project focuses on the
+                 detailed methodology and operation of Kaizen, as well as the establishment of a structured suggestion system to gather and 
+                 implement improvement ideas from employees.
+            </p>
+            <p class="text-justify">Through the systematic application of Kaizen principles, the project aims to identify opportunities for
+                 improvement, streamline workflows, and eliminate waste in the selected process. By conducting data analysis and implementing 
+                 targeted improvements, the project seeks to enhance the efficiency, quality, and overall performance of the process within the 
+                 ceramic factory.
+            </p>
+            <p class="text-justify">The implementation of a suggestion system empowers employees at all levels to contribute ideas for process 
+                improvement, fostering a culture of continuous learning and innovation. By collecting and evaluating suggestions, the project 
+                aims to drive incremental improvements and create a collaborative environment where employees are actively engaged in driving 
+                positive change.
+                </p>
+            <p class="text-justify">By focusing on the methodology and operation of Kaizen and the suggestion system, this project aims to showcase
+                 the benefits of continuous improvement practices in enhancing process efficiency and driving sustainable growth within the 
+                 ceramic factory. Through data analysis, implementation of improvement initiatives, and active employee participation, 
+                 the project demonstrates the value of Kaizen and suggestion systems in achieving tangible improvements and fostering a 
+                 culture of continuous improvement within the organization.</p>
+
+        </div>
+
+        
+
+        
+        
+       
+    </div>
+</div>
+<!-- Portfolio End -->
+
+<!-- Contact Start -->
+<div class="container-fluid py-5" id="contact">
+    <div class="container">
+        <div class="position-relative d-flex align-items-center justify-content-center">
+            <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">Contact</h1>
+            <h1 class="position-absolute text-uppercase text-primary">Contact Me</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="contact-form text-center">
+                    <div id="success"></div>
+                    <form
+                        th:action="@{/home/contact}"
+                        th:object="${contactForm}"
+                        method="post"
+                        name="sentMessage" 
+                        id="contactForm" 
+                        novalidate="novalidate" 
+                    >
+                        <div class="form-row">
+                            <div class="control-group col-sm-6">
+                                <input type="text" class="form-control p-4" id="name" placeholder="Your Name"
+                                required="required" data-validation-required-message="Please enter your name"
+                                    th:field="*{name}"/>
+                                <p class="help-block text-danger"></p>
+                                <p 
+                                th:if="${#fields.hasErrors('name')}" 
+                                th:errors="*{name}"
+                                class="alert alert-danger"
+                                role="alert"
+                                >
+                                Name error</p>
+                            </div>
+                            <div class="control-group col-sm-6">
+                                <input type="email" class="form-control p-4" id="email" placeholder="Your Email"
+                                    required="required" data-validation-required-message="Please enter your email" 
+                                    th:field="*{email}"/>
+                                <p class="help-block text-danger"></p>
+                                <p 
+                                th:if="${#fields.hasErrors('email')}" 
+                                th:errors="*{email}"
+                                class="alert alert-danger"
+                                role="alert"
+                                >
+                                Email error</p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <input type="text" class="form-control p-4" id="subject" placeholder="Subject"
+                                required="required" data-validation-required-message="Please enter a subject" 
+                                th:field="*{subject}"/>
+                            <p class="help-block text-danger"></p>
+                            <p 
+                                th:if="${#fields.hasErrors('subject')}" 
+                                th:errors="*{subject}"
+                                class="alert alert-danger"
+                                role="alert"
+                                >
+                                Subject error</p>
+                        </div>
+                        <div class="control-group">
+                            <textarea class="form-control py-3 px-4" rows="5" id="message" placeholder="Message"
+                                required="required"
+                                data-validation-required-message="Please enter your message" maxlength="3000"
+                                th:field="*{message}"></textarea>
+                            <p class="help-block text-danger"></p>
+                            <p 
+                                th:if="${#fields.hasErrors('message')}" 
+                                th:errors="*{message}"
+                                class="alert alert-danger"
+                                role="alert"
+                                >
+                                Message error</p>
+                        </div>
+                        <div>
+                            <button class="btn btn-outline-primary" type="submit" id="sendMessageButton">Send
+                                Message</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact End -->    
+  
+</body>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<script th:src="@{/js/home.js}"></script>
+
+
+</html>

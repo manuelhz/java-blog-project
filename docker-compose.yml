@@ -1,0 +1,83 @@
+services:
+  database:
+    image: mysql:8.0.39
+    hostname: database
+    container_name: database
+    secrets:
+      - mysql_root_password    
+      - mysql_user
+      - mysql_password
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
+      MYSQL_USER_FILE: /run/secrets/mysql_user
+      MYSQL_PASSWORD_FILE: /run/secrets/mysql_password
+    ports:
+      - "3306:3306"
+    restart: always
+    networks:
+      - spring_net
+    volumes:
+      - db-vol:/var/lib/mysql
+
+  webserver:
+    build: .
+    hostname: webserver
+    container_name: webserver
+    secrets:
+      - mysql_database
+      - mysql_user
+      - mysql_password
+      - mail_user
+      - mail_password
+    environment:
+      MYSQL_HOST: database
+      PASSWORD_TOKEN_RESET_TIMEOUT_MINUTES: 1440
+      SERVER_PORT: 8080
+      MYSQL_PORT: 3306
+      SITE_DOMAIN: http://localhost:8080
+      MYSQL_DATABASE: /run/secrets/mysql_database
+      MYSQL_USER: /run/secrets/mysql_user
+      MYSQL_PASSWORD: /run/secrets/mysql_password
+      MAIL_USER: /run/secrets/mail_user
+      MAIL_PASSWORD: /run/secrets/mail_password
+    ports:
+      - "8080:8080"
+    restart: always
+    networks:
+      - spring_net
+      - frontend_net
+    depends_on:
+      - database    
+    volumes:
+      - templates-vol:/templates
+      - static-vol:/static    
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+
+networks:
+  spring_net:
+  frontend_net:
+volumes:
+  db-vol:
+    external: true
+  static-vol:
+    external: true      
+  templates-vol:
+    external: true
+secrets:
+  mysql_root_password:
+    file: ./password.txt
+  mysql_database:
+    file: ./database.txt
+  mysql_user:
+    file: ./user.txt
+  mysql_password:
+    file: ./mysql_password.txt
+  mail_user:
+    file: ./mail_user.txt
+  mail_password:
+    file: ./mail_password.txt

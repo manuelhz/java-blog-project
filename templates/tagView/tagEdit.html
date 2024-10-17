@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head}"></head>
+
+
+<header th:replace="~{fragments/headerBlog :: header}"></header>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="51">
+
+    <!-- Page Header Start -->
+    <div class="container-fluid pt-5 mt-5" id="blog">
+        <div class="container">
+            <div class="position-relative d-flex align-items-center justify-content-center">
+                <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">Tag</h1>
+                <h1 class="position-absolute text-uppercase text-primary">Edit Tag</h1>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+    
+    <!-- Edit Tag Start -->
+    <div class="container py-5 px-2 bg-white" style = "overflow: hidden;">
+        <div class="row px-4">
+
+            <div class="col-12">
+
+                <form
+                    th:action="@{/blog/tags/edit}"
+                    th:object="${tag}"
+                    method="post"
+                    enctype="multipart/form-data"
+                >
+                    <input type="hidden" id="tagId" th:attr="name='tagId'" th:field="*{tagId}" th:value="${tag.tagId}">
+                    <input type="hidden" id="thumbnailField" th:attr="name='thumbnail'" th:field="*{thumbnail}" th:value="${tag.thumbnail}">
+
+                    <div class="form-group">
+                        <h4>Tag Name</h4>
+                        <input type="text" class="form-control" id="title" name="tagName" th:field="*{tagName}" th:value="${tag.tagName}">
+                        <p 
+                            th:if="${#fields.hasErrors('tagName')}" 
+                            th:errors="*{tagName}"
+                            class="alert alert-danger"
+                            role="alert"
+                        >Tag Name Error</p>
+                    </div>                    
+                    <div class="form-group">
+                        <h4>Thumbnail:</h4>                    
+                        <img id="thumbnailPreview" class="img-fluid rounded w-10" 
+                        th:src="${tag.thumbnail}" alt="Img">    
+                    </div>
+                    <div class="form-group">
+                        <h4>Image Credit:</h4>
+                        <input type="text" class="form-control" id="imageCredit" name="imageCredit" 
+                        th:field="*{imageCredit}" th:value="${tag.imageCredit}">
+                        <p 
+                            th:if="${#fields.hasErrors('imageCredit')}" 
+                            th:errors="*{imageCredit}"
+                            class="alert alert-danger"
+                            role="alert"
+                        >Image Credit error</p>
+                    </div>
+                    <div class="form-group">
+                        <input id="thumbnailInput" type="file" name="file" style="display:none;">
+                        <label class = "btn btn-primary" for="thumbnailInput">Select Image</label>
+                        <p 
+                            th:if="${#fields.hasErrors('thumbnail')}" 
+                            th:errors="*{thumbnail}"
+                            class="alert alert-danger"
+                            role="alert"
+                        >Thumbnail error</p>
+                    </div>
+                    <div class="form-group">
+                        <h4>tag description:</h4>
+                        <textarea id="tagDescription" cols="30" rows="5" class="form-control" th:field="*{tagDescription}" th:utext="${tag.tagDescription}"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <h4>Slug:</h4>
+                        <input type="text" class="form-control" id="slug" name="slug" th:field="*{slug}" th:value="${tag.slug}">
+                        <p 
+                            th:if="${#fields.hasErrors('slug')}" 
+                            th:errors="*{slug}"
+                            class="alert alert-danger"
+                            role="alert"
+                        >Slug error</p>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Save changes" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Edit tag End -->
+</body>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<script th:src="@{/js/blog.js}"></script>

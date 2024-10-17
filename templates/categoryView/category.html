@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head}"></head>
+
+
+<header th:replace="~{fragments/headerBlog :: header}"></header>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="51">
+    <div class="container-fluid  d-flex align-items-center mb-0 py-4"></div>
+    <!-- Last Three Blogs Start -->
+    <div class="container-fluid pt-5" id="blog">
+        <div class="container">
+            <div class="position-relative d-flex align-items-center justify-content-center">
+                <h1 class="display-t text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;"
+                >Category </h1>
+                <h1 class="position-absolute text-uppercase text-primary"
+                >Category</h1>
+            </div>
+            <div class="row d-flex justify-content-between">
+
+                <!-- Item Head Start -->
+                
+                <div class="mb-4">
+                    <h1 class="font-weight-medium " th:text="${category.categoryName}">
+                        Rebum lorem no eos 
+                    </h1>
+                    <h5 class="font-weight-normal text-justify" th:text="${category.categoryDescription}">
+                        Rebum lorem no eos ut ipsum diam tempor sed rebum elitr ipsum
+                    </h5>
+                </div>
+                <div class="mb-4">
+                    <img class="img-fluid rounded w-100" th:src="${category.thumbnail}" alt="Img">
+                    <div class="image-credit" th:utext="${#strings.replace(category.imageCredit, '<', '&lt;')}"> </div>
+                </div>
+                <!-- Item head End-->              
+
+            </div>
+
+            <div class="position-relative d-flex align-items-center justify-content-center">
+                <h1 class="display-t text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;"
+                >Category </h1>
+                <h1 class="position-absolute text-uppercase text-primary"
+                >Category posts</h1>
+            </div>
+        </div>
+    </div>
+    <!-- Last Three Blogs End -->
+
+    <!-- Blog List Start -->
+    <div class="container bg-white pt-5">
+
+        <!-- Blog item Start-->
+        <div class="row blog-item px-3 pb-5" th:each="post, iterator : ${posts}">
+            <div class="col-md-5">
+                <img class="img-fluid mb-4 mb-md-0" th:src="${post.featuredImage}" alt="Image">
+            </div>
+            <div class="col-md-7">
+                <span class="d-flex justify-content-between dropdown">
+                    <h3 class="mb-3 font-weight-bold my-auto" th:text="${post.title}">Lorem ipsum dolor sit amet</h3>
+                    <span class="dropdown" id="dropdownMenu" data-toggle="dropdown">
+                        <button type="button" class="btn btn-light btn-social"  aria-haspopup="true" aria-expanded="false">                       
+                            <i class="fa fa-ellipsis-v"  ></i>
+                        </button>
+                    </span>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                        <a class="dropdown-item" th:href="@{'/blog/posts/' + ${post.slug}}">Read More <i class="fa fa-eye"></i></a>
+                        <a class="dropdown-item" th:href="@{'/blog/posts/' + ${post.postId} + '/edit'}"
+                            th:if="(${#authorization.expression('@securityService.isWriter(__${post.postId}__)')}
+                            and ${#authorization.expression(@securityService.hasPrivilege('EDIT_POSTS'))})
+                            or ${#authorization.expression(@securityService.hasPrivilege('EDIT_OTHERS_POSTS'))}"
+                            >Edit <i class="fa fa-pen"></i>
+                        </a>
+                        <a class="dropdown-item" th:href="@{'/blog/posts/create'}"
+                            sec:authorize="@securityService.hasPrivilege('PUBLISH_POSTS')">
+                            New Post <i class="fa fa-plus"></i>
+                        </a>
+                        <a class="dropdown-item" data-toggle="modal" th:data-target="'#modal'+${iterator.index}"
+                            th:if="(${#authorization.expression('@securityService.isWriter(__${post.postId}__)')}
+                            and ${#authorization.expression(@securityService.hasPrivilege('DELETE_POSTS'))})
+                            or ${#authorization.expression(@securityService.hasPrivilege('DELETE_OTHERS_POSTS'))}">
+                            Delete <i class="fa fa-trash"></i>
+                        </a>
+                    </div>                                        
+                </span>
+                <div class="d-flex mb-0">
+                    <small class="mr-2 text-muted" th:text="${#temporals.format(post.publishedAt, 'yyyy-MM-dd')}"><i
+                            class="fa fa-calendar-alt"></i> 01-Jan-2045</small>                    
+                    <small class="mr-2 text-muted"><i class="fa fa-comments"></i> <span
+                            th:text="${post.numberOfComments()}">15</span> Comments</small>
+                </div>
+                <div class="d-flex flex-wrap mb-3">
+                    <small class="mr-1 text-muted" th:each="category : ${post.categories}">
+                        <a 
+                            href="#"
+                            class="btn-outline-secondary mr-3" 
+                            th:href="@{'/blog/categories/' + ${category.slug}}"
+                        > 
+                            <i class="fas fa-folder"></i>
+                            <th:block th:text="${category.categoryName}"></th:block>
+                            
+                        </a>
+                    </small>                      
+                </div>
+                
+                    <p class="text-justify" th:text="${post.metaSummary}">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu suscipit orci velit id libero
+                    </p>
+                    
+                
+                <a class="btn btn-link p-0" th:href="@{'/blog/posts/' + ${post.slug}}">Read More <i class="fa fa-eye"></i></a>
+                <!-- modal section  -->
+                <div class="modal fade" th:id="modal+${iterator.index}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Danger</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <a th:href="@{'/blog/posts/' + ${post.postId} + '/delete'}"
+                                class="btn btn-danger btn-lg active" 
+                                role="button" 
+                                aria-pressed="true" 
+                                >Delete</a>     
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+                <!-- end of modal section -->
+            </div>
+
+        </div>
+        <!-- Blog item End-->
+
+        <div class="row px-3 pb-5">
+
+            <!-- Page navigation start-->
+            <nav aria-label="Page navigation">
+                <ul class="pagination m-0 mx-3">
+                    <li th:class="${page==1}? 'page-item disabled' : 'page-item'"
+                    >
+                        <a class="page-link" th:href="@{'/blog/categories/' +${category.slug} +'?page='+ ${page-1}}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <th:block th:each="i : ${#numbers.sequence(1, totalPages)}">
+                        <li th:class="${i == page}? 'page-item active' : 'page-item'">
+                            <a class="page-link" th:href="@{'/blog/categories/' + ${category.slug} + '?page=' + ${i}}" th:text="${i}">1</a>
+                        </li>
+
+                    </th:block>
+
+                
+
+                    <li class="page-item" th:class="${page==totalPages}? 'page-item disabled' : 'page-item'">
+                        <a class="page-link" th:href="@{'/blog/categories/' +${category.slug} +'?page='+ ${page+1}}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- Page navigation End -->
+        </div>
+    </div>
+    <!-- Blog List End -->
+
+
+    <!-- Blog Start -->
+    <div class="container-fluid pt-5" id="blog">
+        <div class="container">
+            <div class="position-relative d-flex align-items-center justify-content-center">
+                <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">Blog</h1>
+                <h1 class="position-absolute text-uppercase text-primary">Latest Posts</h1>
+            </div>
+            <div class="row">
+                <!-- Item Blog Start -->
+
+                <div class="col-lg-4 mb-5" th:each="post, iterStat: ${lastThreePosts}" th:if="${iterStat.index}<3">
+                    <div class="position-relative mb-4">
+                        <img class="img-fluid rounded w-100" th:src="${post.featuredImage}" alt="Img">
+                        <div class="blog-date">
+                            <h4 class="font-weight-bold mb-n1" th:text="${#temporals.day(post.publishedAt)}">01</h4>
+                            <small class="text-white text-uppercase" th:text="${#temporals.monthNameShort(post.publishedAt)}">Jan</small>                           
+                        </div>
+                    </div>
+                    <h5 class="font-weight-medium mb-4 text-justify" th:text="${post.metaSummary}">Rebum lorem no eos ut ipsum diam tempor sed rebum elitr ipsum
+                    </h5>
+                    <a class="btn btn-sm btn-outline-primary py-2" th:href="@{'/blog/posts/' + ${post.slug}}">Read More</a>
+                </div>
+                <!-- Item blog End-->
+            </div>
+        </div>
+    </div>
+    <!-- Blog End -->
+      
+    
+    
+  
+
+
+
+
+</body>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<script th:src="@{/js/blog.js}"></script>
+
+
+</html>

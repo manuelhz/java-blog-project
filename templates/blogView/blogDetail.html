@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head}"></head>
+
+
+<header th:replace="~{fragments/headerBlog :: header}"></header>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="51">
+    <!-- Page Header Start -->
+
+    <!-- Page Header End -->
+
+    <!-- Blog Detail Start -->
+    <div class="container py-5 px-2 pt-5 mt-5 bg-white">
+        <div class="row px-4">
+            <div class="col-12">
+                <img class="img-fluid w-100 mb-0" th:src="${post.featuredImage}" alt="Image">
+           
+                <div class="image-credit mt-0 pt-0" th:utext="${#strings.replace(post.imageCredit, '<', '&lt;')}"> </div>
+              
+
+                <span class="d-flex mt-5">
+                    <div>
+                        <h2 class="mb-3 font-weight-bold my-auto" th:text="${post.title}">Nonumy ipsum takimata et sanct</h2>
+                        <p class="text-justify" th:text="${post.metaSummary}"></p>
+                    </div>
+                    <div>                    
+                        <span class="dropdown" id="postDropdownMenu" data-toggle="dropdown">
+                            <button type="button" class="btn btn-light btn-social" aria-haspopup="true" aria-expanded="false">                       
+                                <i class="fa fa-ellipsis-v" ></i>
+                            </button>
+                        </span>
+                        <div class="dropdown-menu" aria-labelledby="postDropdownMenu">
+                            <a class="dropdown-item" th:href="@{'/blog/posts/' + ${post.slug}}">Read More <i class="fa fa-eye"></i></a>
+                            
+                            <a class="dropdown-item" th:href="@{'/blog/posts/' + ${post.postId} + '/edit'}"
+                                th:if="(${#authorization.expression('@securityService.isWriter(__${post.postId}__)')}
+                                and ${#authorization.expression(@securityService.hasPrivilege('EDIT_POSTS'))})
+                                or ${#authorization.expression(@securityService.hasPrivilege('EDIT_OTHERS_POSTS'))}">
+                                Edit <i class="fa fa-pen"></i>
+                            </a>
+
+                            <a class="dropdown-item" th:href="@{'/blog/posts/create'}"
+                                sec:authorize="@securityService.hasPrivilege('PUBLISH_POSTS')">
+                                New Post <i class="fa fa-plus"></i>
+                            </a>
+
+                            <a class="dropdown-item" data-toggle="modal" data-target="#modal"
+                                th:if="(${#authorization.expression('@securityService.isWriter(__${post.postId}__)')}
+                                and ${#authorization.expression(@securityService.hasPrivilege('DELETE_POSTS'))})
+                                or ${#authorization.expression(@securityService.hasPrivilege('DELETE_OTHERS_POSTS'))}">
+                                Delete <i class="fa fa-trash"></i>
+                            </a>
+                        </div>
+                    
+                
+                        <!-- modal section  -->
+                        <div class="modal fade" th:id="modal" tabindex="-1" role="dialog" aria-labelledby="postModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="postModalLabel">Danger</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                        <a th:href="@{'/blog/posts/' + ${post.postId} + '/delete'}"
+                                        class="btn btn-danger btn-lg active" 
+                                        role="button" 
+                                        aria-pressed="true" 
+                                        >Delete</a>     
+                                    </div>    
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end of modal section -->
+                    </div>
+                </span>                
+                <div class="d-flex justify-content-start mb-3">                    
+                    <img th:src="${post.account.profilePicture}" alt="Image" class="mr-1 rounded-circle" style="width:30px;height:30px;">
+                    <p class="mr-3 my-auto text-muted" th:text="${post.account.fullName()}">John Doe</p>
+                    <p class="mr-3 my-auto text-muted"><i class="fa fa-calendar-alt"></i> <span
+                            th:text="${#temporals.format(post.publishedAt, 'yyyy-MM-dd')}">01-Jan-2045</span></p>                            
+                    <p class="mr-3 my-auto text-muted"><i class="fa fa-comments"></i><span
+                            th:text="${post.numberOfComments()}">15</span> Comments</p>
+                </div>
+                <div class="d-flex flex-wrap mb-3 ml-0 pl-0">
+                    <small class="mr-1 text-muted" th:each="category : ${post.categories}">
+                        <a 
+                            href="#"
+                            class="btn-outline-secondary mr-3" 
+                            th:href="@{'/blog/categories/' + ${category.slug}}"
+                        > 
+                            <i class="fas fa-folder"></i>
+                            <th:block th:text="${category.categoryName}"></th:block>
+                            
+                        </a>
+                    </small>                   
+                </div>
+                <!-- Tags start -->
+                <div class="col-12 pb-4 px-0 ml-0">
+                    <span th:each="tag : ${post.tags}">
+
+                        <a th:href="@{'/blog/tags/' + ${tag.slug}}" class="btn btn-sm btn-outline-primary mb-1" th:text="${tag.tagName}">Lorem</a>
+                    </span>                
+                </div>
+                <!-- Tags end -->
+                
+                <div id = "" th:utext="${post.content}">Clita duo sadipscing amet ea ut kasd amet dolore, sed erat at dolore vero
+                    tempor et sit amet, amet
+                    amet
+                    elitr et consetetur ea duo. Gubergren tempor rebum clita at sit diam. Ea sadipscing voluptua et sit
+                    diam
+                    diam sed, gubergren magna ipsum lorem clita dolores nonumy dolor. Gubergren duo invidunt elitr amet
+                    labore dolores justo sanctus nonumy. Accusam diam tempor at ea clita dolores dolor et ipsum, dolor
+                    voluptua consetetur gubergren sit, no consetetur kasd vero invidunt clita dolore elitr eos, accusam
+                    amet
+                    et labore sed sadipscing accusam labore dolores. Eirmod no lorem sed dolor nonumy consetetur tempor
+                    sed.
+                </div>
+            </div>
+
+            <!-- here  -->
+            
+            <div class="col-12 py-4">
+                <div class="btn-group btn-group-lg w-100">
+                    <button 
+                    type="button" class="btn btn-outline-primary" 
+                    th:disabled="${isFirstPost}" 
+                    th:attr="onclick=|redirectToPreviousPost('${post.slug}')|">
+                    <i class="fa fa-angle-left mr-2"></i>
+                        Previous</button>
+                    <button 
+                    type="button" class="btn btn-outline-primary" 
+                    th:disabled="${isLastPost}" 
+                    th:attr="onclick=|redirectToNextPost('${post.slug}')|">
+                    Next<i class="fa fa-angle-right ml-2"></i></button>
+                </div>
+            </div>
+
+            <div class="col-12 py-4" th:if="${post.enableComments}">
+                <h3 id="comments" class="mb-4 font-weight-bold"><span th:text="${post.numberOfComments}">1</span> Comments</h3>
+
+                <div class="media mb-4" th:each="comment, iterator : ${#lists.sort(#lists.toList(post.children), commentComparator)}">
+                    <img th:src="${comment.postAccount.profilePicture}" alt="Image" class="mr-3 mt-1 rounded-circle"
+                        style="width:60px;">
+                    <div class="media-body">
+                        <!-- Start of comments detail part -->
+                        <div class="d-flex">
+                            <div>
+                                <h4><span th:text="${comment.postAccount.fullName()}">John Doe</span>
+                                    <small>
+                                        <i 
+                                        th:text="${#temporals.format(comment.publishedAt, 'dd MMM yyy') 
+                                        + ' at ' +#temporals.format(comment.publishedAt, 'HH:mm a')}"
+                                        >
+                                        01 Jan 2045 at 12:00pm
+                                        </i>
+                                    </small>                            
+                                </h4>                        
+                                <p th:text="${comment.content}">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                                    labore et dolore magna aliqua.
+                                </p>
+                            </div>
+
+                            <!-- Circular dropdown menu start -->
+                            <div class="col-md-7">
+                                <span class="d-flex justify-content-between dropdown">                    
+                                    <span class="dropdown" id="commentDropdownMenu" data-toggle="dropdown">
+                                        <button class="btn-social btn btn-light" type="button"  aria-haspopup="true" aria-expanded="false">                       
+                                            <i class="fa fa-ellipsis-v"  ></i>
+                                        </button>
+                                    </span>
+                                    <div class="dropdown-menu" aria-labelledby="commentDropdownMenu" th:with="id=${comment.commentId}">
+
+                                        <a type="button" class="dropdown-item" data-toggle="modal" th:if="${post.enableNewComments}" 
+                                            th:data-target="'#replyComment'+${iterator.index}">Reply <i class="fas fa-reply"></i>
+                                        </a>
+
+                                        <a type="button" class="dropdown-item" data-toggle="modal"
+                                            th:data-target="'#editComment'+${iterator.index}"
+                                            th:if="${#authorization.expression('@securityService.isCommenter(__${comment.commentId}__)')}
+                                            or ${#authorization.expression(@securityService.hasPrivilege('MODERATE_COMMENTS'))}"
+                                            >Edit <i class="fas fa-edit"></i>
+                                        </a>
+
+                                        <a type="button" class="dropdown-item" data-toggle="modal" 
+                                            th:data-target="'#modal'+${iterator.index}"                                        
+                                            th:if="${#authorization.expression('@securityService.isCommenter(__${comment.commentId}__)')}
+                                            or ${#authorization.expression(@securityService.hasPrivilege('MODERATE_COMMENTS'))}"
+                                            >Delete <i class="fa fa-trash"></i>
+                                        </a>
+
+                                    </div>
+                                </span>       
+                                <!-- delete modal section  -->
+                                <div class="modal fade" th:id="modal+${iterator.index}" tabindex="-1" role="dialog" 
+                                aria-labelledby="commentModalLabel" aria-hidden="true">
+
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="commentModalLabel">Danger</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Are you sure?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                <a th:href="@{'/blog/comments/' + ${comment.commentId} + '/delete'}"
+                                                    class="btn btn-danger btn-lg active" 
+                                                    role="button" 
+                                                    aria-pressed="true" 
+                                                >Delete</a>     
+                                            </div>    
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end of delete modal section -->
+
+                                <!-- edit comment modal section  -->
+                                <div class="modal fade" th:id="editComment+${iterator.index}" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="commentModalLabel">Edit Comment</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form                                            
+                                            th:action="@{'/blog/comments/' + ${comment.commentId} + '/edit'}"
+                                            th:object="${comment}"
+                                            method="POST"
+                                            >
+                                            <div class="modal-body">
+                                                <input type="hidden" name="commentId" th:value="*{commentId}"/>
+                                                <div class="form-group">
+                                                    <label for="message">Message</label>
+                                                    <textarea cols="30" rows="5" class="form-control" th:text="*{content}" name="content"></textarea>
+                                                </div>
+                                                
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                <button type="submit" class="btn btn-primary" >Confirm</button>
+                                                
+                                            </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end of edit comment modal section -->
+
+                                <!-- Reply comment modal section  -->
+                                <div class="modal fade" th:id="replyComment+${iterator.index}" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="commentModalLabel">Reply</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form
+                                            th:action="@{'/blog/comments/' + ${comment.commentId} + '/answer'}"
+                                            th:object="${reply}"
+                                            method="POST"
+                                            >
+                                                <div class="modal-body">
+                                                    <input type="hidden" name="commentId" th:value="*{commentId}"/>
+                                                    <div sec:authorize="!isAuthenticated()" class="form-group">
+                                                        <label for="name">First name *</label>
+                                                        <input type="text" class="form-control" id="name" name="name" th:field="*{postAccount.firstName}">
+                                                    </div>
+                                                    <div sec:authorize="!isAuthenticated()" class="form-group">
+                                                        <label for="name">Last name</label>
+                                                        <input type="text" class="form-control" id="name" name="name" th:field="*{postAccount.lastName}">
+                                                    </div>
+                                                    <div sec:authorize="!isAuthenticated()" class="form-group">
+                                                        <label for="email">Email *</label>
+                                                        <input type="email" class="form-control" id="email" name="email" th:field="*{postAccount.email}">
+                                                    </div>
+                                                    <div sec:authorize="!isAuthenticated()" class="form-group">
+                                                        <label for="website">Website</label>
+                                                        <input type="url" class="form-control" id="website"name="website" th:field="*{postAccount.website}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="message">Message</label>
+                                                        <textarea cols="30" rows="5" class="form-control" th:text="'@' + ${comment.postAccount.fullName()} + ': '" name="content"></textarea>
+                                                    </div>
+                                                    
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                    <button type="submit" class="btn btn-primary" >Confirm</button>
+                                                    
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end of Reply comment modal section -->
+                            </div>
+                            <!-- End of circular dropdawn menu -->
+
+                            
+                        </div>
+                        <!-- End of comments detail part -->
+
+                        <!-- Start of Anwers detail part -->
+                        <div class="media mt-4" th:each="answer, iter : ${#lists.sort(#lists.toList(comment.children), commentComparator)}">
+                            <img th:src="${answer.postAccount.profilePicture}" alt="Image" class="mr-3 mt-1 rounded-circle" style="width:60px;">
+                            <div class="media-body">
+                                <div class="d-flex">
+                                    <div>
+                                        <h4><span th:text="${answer.postAccount.fullName()}">John Doe</span>
+                                            <small>
+                                                <i
+                                                th:text="${#temporals.format(answer.publishedAt, 'dd MMM yyy') 
+                                                + ' at ' +#temporals.format(answer.publishedAt, 'HH:mm a')}"
+                                                >
+                                                01 Jan 2045 at 12:00pm
+                                                </i>
+                                            </small>
+                                        </h4>
+                                        <p th:text="${answer.content}">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                            incididunt
+                                            ut labore et dolore magna aliqua.
+                                        </p>
+                                    </div>
+                                   <!-- Circular dropdown menu start -->
+                                   <div class="col-md-7">
+                                    <span class="d-flex justify-content-between dropdown">                    
+                                        <span class="dropdown" id="answerDropdownMenu" data-toggle="dropdown">
+                                            <button class="btn-social btn btn-light" type="button"  aria-haspopup="true" aria-expanded="false">                       
+                                                <i class="fa fa-ellipsis-v"  ></i>
+                                            </button>
+                                        </span>
+                                        <div class="dropdown-menu" aria-labelledby="answerDropdownMenu">
+
+                                            <a type="button" class="dropdown-item" data-toggle="modal" 
+                                                th:data-target="'#replyAnswer'+${iter.index}" 
+                                                th:if="${post.enableNewComments}">Reply <i class="fas fa-reply"></i>
+                                            </a>
+                                            <a type="button" class="dropdown-item" data-toggle="modal" 
+                                                th:data-target="'#editAnswerModal'+${iter.index}"
+                                                th:if="${#authorization.expression('@securityService.isCommenter(__${answer.commentId}__)')}
+                                                or ${#authorization.expression(@securityService.hasPrivilege('MODERATE_COMMENTS'))}">
+                                                Edit <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a type="button" class="dropdown-item" data-toggle="modal" 
+                                                th:data-target="'#answerModal'+${iter.index}"
+                                                th:if="${#authorization.expression('@securityService.isCommenter(__${answer.commentId}__)')}
+                                                or ${#authorization.expression(@securityService.hasPrivilege('MODERATE_COMMENTS'))}">
+                                                Delete <i class="fa fa-trash"></i>
+                                            </a>
+                                            
+                                        </div>                                        
+                                    </span>       
+                                    <!-- delete modal section  -->
+                                    <div class="modal fade" th:id="answerModal+${iter.index}" tabindex="-1" role="dialog" aria-labelledby="answerModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="answerModalLabel">Danger</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Are you sure?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                    <a th:href="@{'/blog/comments/' + ${answer.commentId} + '/delete'}"
+                                                    class="btn btn-danger btn-lg active" 
+                                                    role="button" 
+                                                    aria-pressed="true" 
+                                                    >Delete</a>     
+                                                </div>    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end of delete modal section -->
+
+                                    <!-- edit comment modal section  -->
+                                    <div class="modal fade" th:id="editAnswerModal+${iter.index}" tabindex="-1" role="dialog" aria-labelledby="editAnswerModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="editAnswerModalLabel">Edit Comment</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form                                            
+                                                    th:action="@{'/blog/comments/' + ${answer.commentId} + '/edit'}"
+                                                    th:object="${answer}"
+                                                    method="POST"
+                                                >
+                                                    <div class="modal-body">
+                                                        <input type="hidden" name="commentId" th:value="*{commentId}"/>
+                                                        <div class="form-group">
+                                                            <label for="message">Message</label>
+                                                            <textarea cols="30" rows="5" class="form-control" th:text="*{content}" name="content"></textarea>
+                                                        </div>                                                        
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                        <button type="submit" class="btn btn-primary" >Confirm</button>                                                        
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end of edit comment modal section -->
+
+                                    <!-- Reply answer modal section  -->
+                                    <div class="modal fade" th:id="replyAnswer+${iter.index}" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="answerModalLabel">Reply</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form
+                                                th:action="@{'/blog/comments/' + ${comment.commentId} + '/answer'}"
+                                                th:object="${reply}"
+                                                method="POST"
+                                                >
+                                                <div class="modal-body">
+                                                    <input type="hidden" name="commentId" th:value="*{commentId}"/>
+                                                    <div sec:authorize="!isAuthenticated()" class="form-group">
+                                                        <label for="name">First name *</label>
+                                                        <input type="text" class="form-control" id="name" name="name" th:field="*{postAccount.firstName}">
+                                                    </div>
+                                                    <div sec:authorize="!isAuthenticated()" class="form-group">
+                                                        <label for="name">Last name</label>
+                                                        <input type="text" class="form-control" id="name" name="name" th:field="*{postAccount.lastName}">
+                                                    </div>
+                                                    <div sec:authorize="!isAuthenticated()" class="form-group">
+                                                        <label for="email">Email *</label>
+                                                        <input type="email" class="form-control" id="email" name="email" th:field="*{postAccount.email}">
+                                                    </div>
+                                                    <div sec:authorize="!isAuthenticated()" class="form-group">
+                                                        <label for="website">Website</label>
+                                                        <input type="url" class="form-control" id="website"name="website" th:field="*{postAccount.website}">
+                                                    </div>
+                                                    <div class="form-group">
+
+                                                        <textarea cols="30" rows="5" class="form-control" th:text="'@' + ${answer.postAccount.fullName()} + ': '" name="content"></textarea>
+                                                    </div>
+                                                    
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                    <button type="submit" class="btn btn-primary" >Confirm</button>
+                                                    
+                                                </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end of Reply answer modal section -->
+                                </div>
+                                <!-- End of circular dropdawn menu --> 
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Finish of Anwers detail part -->
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-12" th:if="${post.enableNewComments}">
+                <h3 class="mb-4 font-weight-bold">Leave a comment</h3>
+                <form
+                th:action="@{/blog/comments/add}"
+                th:object="${comment}"
+                method="post"
+                >
+                    <input type="hidden" id="parentPost.postId" th:attr="name='parentPost.postId'" th:field="*{parentPost.postId}" th:value="${post.postId}">
+                    <input type="hidden" id="parentPost.slug" th:attr="name='parentPost.slug'" th:field="*{parentPost.slug}" th:value="${post.slug}">
+                    <div sec:authorize="!isAuthenticated()" class="form-group">
+                        <label for="name">First name *</label>
+                        <input type="text" class="form-control" id="name" name="name" th:field="*{postAccount.firstName}">
+                    </div>
+                    <div sec:authorize="!isAuthenticated()" class="form-group">
+                        <label for="name">Last name</label>
+                        <input type="text" class="form-control" id="name" name="name" th:field="*{postAccount.lastName}">
+                    </div>
+                    <div sec:authorize="!isAuthenticated()" class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" class="form-control" id="email" name="email" th:field="*{postAccount.email}">
+                    </div>
+                    <div sec:authorize="!isAuthenticated()" class="form-group">
+                        <label for="website">Website</label>
+                        <input type="url" class="form-control" id="website"name="website" th:field="*{postAccount.website}">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+
+                        <textarea id="message" cols="30" rows="5" class="form-control" th:field="*{content}" ></textarea>
+
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Leave Comment" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Blog Detail End -->
+
+
+    <!-- Last Three Blogs Start -->
+    <div class="container-fluid pt-5" id="blog">
+        <div class="container">
+            <div class="position-relative d-flex align-items-center justify-content-center">
+                <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">Blog</h1>
+                <h1 class="position-absolute text-uppercase text-primary">Latest Blogs</h1>
+            </div>
+            <div class="row">
+                <!-- Item Head Start -->
+
+                <div class="col-lg-4 mb-5" th:each="post : ${lastThreePosts}">
+                    <div class="position-relative mb-4">
+                        <img class="img-fluid rounded w-100" th:src="${post.featuredImage}" alt="Img">
+                        <div class="blog-date">
+                            <h4 class="font-weight-bold mb-n1" th:text="${#temporals.day(post.publishedAt)}">01</h4>
+                            <small class="text-white text-uppercase" th:text="${#temporals.monthNameShort(post.publishedAt)}">Jan</small>
+                           
+                        </div>
+                    </div>
+                    <h5 class="font-weight-medium text-justify mb-4" th:text="${post.metaSummary}">Rebum lorem no eos ut ipsum diam tempor sed rebum elitr ipsum
+                    </h5>
+                    <a class="btn btn-sm btn-outline-primary py-2" th:href="@{'/blog/posts/' + ${post.slug}}">Read More</a>
+                </div>
+
+                <!-- Item head End-->              
+
+            </div>
+        </div>
+    </div>
+    <!-- Last Three Blogs End -->    
+
+
+
+</body>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<script th:src="@{/js/blog.js}"></script>

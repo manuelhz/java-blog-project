@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head}"></head>
+
+
+<header th:replace="~{fragments/headerBlog :: header}"></header>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="51">
+
+    <!-- Page Header Start -->
+    <div class="container-fluid pt-5 mt-5" id="blog">
+        <div class="container">
+            <div class="position-relative d-flex align-items-center justify-content-center">
+                <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">Profile</h1>
+                <h1 class="position-absolute text-uppercase text-primary">Edit Profile</h1>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+    
+    <!-- Edit Profile Start -->
+    <div class="container py-3 px-2 bg-white" style = "overflow: hidden;">
+        <div class="row px-4">
+
+            <div class="col-12">
+
+                <form
+                    th:action="@{/profile}"
+                    th:object="${account}"
+                    method="post"
+                    enctype="multipart/form-data"                    
+                >                    
+                 
+                        <input type="hidden" id="accountId" th:attr="name='AccountId'" th:field="*{accountId}" th:value="${account.accountId}">
+                        <input type="hidden" id="roles" th:attr="name='roles'" th:field="*{roles}" th:value="${account.roles}">
+                        
+
+                        <div class="form-group">
+                            <h4>First name</h4>
+                            <input type="text" class="form-control" id="firstName" name="firstName" th:field="*{firstName}" th:value="${account.firstName}">
+                            <p 
+                                th:if="${#fields.hasErrors('firstName')}" 
+                                th:errors="*{firstName}"
+                                class="alert alert-danger"
+                                role="alert"
+                            >Name error</p>
+                        </div>
+                        <div class="form-group">
+                            <h4>Last name</h4>
+                            <input type="text" class="form-control" id="lastName" name="lastName" th:field="*{lastName}" th:value="${account.lastName}">
+                        </div>                    
+                        <div class="form-group">
+                            <h4>Profile picture:</h4>                    
+                            <img id="profilePicturePreview" class="img-fluid rounded-circle" th:src="${account.profilePicture}" alt="Img" style="width: 150px; padding: 10px 10px 10px 10px;">    
+                        </div>
+                        <p id = "errorMsg" th:text="${error}" th:if="${error ne null}" class="alert alert-danger"></p>
+                        <div class="form-group">
+                            <input id="profilePictureInput" type="file" name="file" style="display:none;">
+                            <label class = "btn btn-primary" for="profilePictureInput">Select Image</label>
+                        </div>
+                        <div class="form-group">
+                            <h4>Email:</h4>
+                            <input type="email" class="form-control" id="email" name="email" th:field="*{email}" th:value="${account.email}">
+                            <p 
+                                th:if="${#fields.hasErrors('email')}" 
+                                th:errors="*{email}"
+                                class="alert alert-danger"
+                                role="alert"
+                            >Email error</p>
+                        </div>
+                        <div class="form-group">
+                            <h4>Email confirmation:</h4>
+                            <input type="email" class="form-control" id="emailConfirmation" name="emailConfirmation" oninput="checkEmail(this)" th:value="${account.email}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <h4>Mobile phone number</h4>
+                            <input type="text" class="form-control" id="mobile" name="mobile" th:field="*{mobile}" th:value="${account.mobile}">
+                        </div>
+                        
+                        <div class="form-group">
+                            <h4>Website</h4>
+                            <input type="text" class="form-control" id="website" name="website" th:field="*{website}" th:value="${account.website}">
+                        </div>
+                        <div class="form-group">
+                            <h4>About you:</h4>
+                            <textarea cols="30" rows="5" class="form-control" th:field="*{about}" th:value="${account.about}"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Save changes" class="btn btn-primary">
+                        </div>
+                 
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Edit Profile End -->
+</body>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<script th:src="@{/js/blog.js}"></script>

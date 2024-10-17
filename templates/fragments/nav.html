@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://thymeleaf.org/extras/spring-security">
+
+<head></head>
+<header>
+    
+
+
+
+</header>
+
+<body>
+    <!-- Navbar Start -->
+    <nav class="navbar fixed-top shadow-sm navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-lg-5">
+        <a href="/" class="navbar-brand ml-lg-3">
+            <h1 class="m-0 display-5"><span class="text-primary"><span class="material-symbols-outlined">
+                        lab_research
+                    </span>ManuelHZ</span></h1>
+        </a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse px-lg-3" id="navbarCollapse">
+            <div class="navbar-nav m-auto py-0">
+                <a href="#home" class="nav-item nav-link active">Home</a>
+                <a href="#about" class="nav-item nav-link">About</a>
+                <a href="#qualification" class="nav-item nav-link">Qualification</a>
+                <a href="#experience" class="nav-item nav-link">Expericence</a>
+                <a href="#skill" class="nav-item nav-link">Skill</a>
+                <!--<a href="#service" class="nav-item nav-link">Service</a>-->
+                <a href="#portfolio" class="nav-item nav-link">Portfolio</a>
+                <!--<a href="#testimonial" class="nav-item nav-link">Review</a>-->
+                <a href="/blog/posts/" class="nav-item nav-link">Blog</a>
+                <a href="#contact" class="nav-item nav-link">Contact</a>
+
+                <a sec:authorize="!isAuthenticated()" href="/login" class="nav-item nav-link" data-toggle="tooltip" data-placement="bottom" title="Sign In"><i class="fas fa-sign-in-alt" ></i> </a>
+                    
+                    <div sec:authorize="isAuthenticated()" class="dropdown nav-item nav-link">
+                        <a class="dropdown-toggle text-decoration-none text-dark" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Options
+                        </a>
+                      
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a href="/logout" class="dropdown-item" data-toggle="tooltip" data-placement="bottom" title="Sign Out" ><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+                            <a class="dropdown-item" href="/profile"><i class="fas fa-user"></i> Profile</a>
+                            <a class="dropdown-item" href="/reset-password"><i class="fas fa-key"></i> Reset Password</a>
+                            <a class="dropdown-item" href="/blog/categories"><i class="fas fa-folder"></i> Categories</a>
+                            <a class="dropdown-item" href="/blog/tags"><i class="fas fa-tag"></i> Tags</a>
+                            <a class="dropdown-item" href="/accounts" sec:authorize="@securityService.hasPrivilege('EDIT_USERS', 'DELETE_USERS')"><i class="fas fa-user"></i> Accounts</a>
+                            <a class="dropdown-item" href="/accounts/delete"><i class="fas fa-exclamation-triangle"></i> Delete Account</a>                            
+                        </div>
+                    </div>
+            </div>
+            <a href="/contact" class="btn btn-outline-primary d-none d-lg-block">Hire Me</a>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+</body>
+
+</html>

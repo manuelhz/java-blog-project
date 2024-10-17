@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head}"></head>
+
+
+<header th:replace="~{fragments/headerBlog :: header}"></header>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="51">
+
+    <!-- Page Header Start -->
+    <div class="container-fluid pt-5 mt-5" id="blog">
+        <div class="container">
+            <div class="position-relative d-flex align-items-center justify-content-center">
+                <h1 class="display-1 text-uppercase text-white" >Edit Post</h1>
+                <h1 class="position-absolute mb-4 font-weight-bold">Edit Post</h1>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+    
+    <!-- Edit Post Start -->
+    <div class="container py-5 px-2 bg-white">
+        <div class="row px-4">
+
+            <div class="col-12">
+
+                <form
+                    th:action="@{/blog/posts/edit}"
+                    th:object="${post}"
+                    method="post"
+                    enctype="multipart/form-data"
+                >
+                    <input type="hidden" id="postId" th:attr="name='postId'" th:field="*{postId}" th:value="${post.postId}">
+                    <input type="hidden" id="oldPostImagePaths" th:attr="name='oldPostImagePaths'" th:value="${oldPostImagePaths}">
+                    <input type="hidden" id="thumbnailField" th:attr="name='featuredImage'" th:field="*{featuredImage}" th:value="${post.featuredImage}">
+                    
+                    <div class="form-group">
+                        <h4>Title:</h4>
+                        <input type="text" class="form-control" id="title" name="title" th:field="*{title}" th:value="${post.title}">
+                        <p 
+                            th:if="${#fields.hasErrors('title')}" 
+                            th:errors="*{title}"
+                            class="alert alert-danger"
+                            role="alert"
+                        >Title error</p>
+                    </div>
+                    <div class="form-group">
+                        <h4>Slug:</h4>
+                        <input type="text" class="form-control" id="slug" name="slug" th:field="*{slug}" th:value="${post.slug}">
+                        <p 
+                            th:if="${#fields.hasErrors('slug')}" 
+                            th:errors="*{slug}"
+                            class="alert alert-danger"
+                            role="alert"
+                        >Slug error</p>
+                    </div>
+                    <div class="form-group">
+                        <h4>Published:</h4>
+                        <div class="form-check">                        
+                            <input type="checkbox" class="form-check-input" id="published" name="published" th:field="*{published}" th:checked="${post.published}">
+                            <label class="form-check-label" for="published"> Published</label>                        
+                        </div>      
+                    </div>
+                    <div class="form-group">
+                        <h4>Enable Comments:</h4>
+                        <div class="form-check">                        
+                            <input type="checkbox" class="form-check-input" id="enableComments" name="enableComments" th:field="*{enableComments}" th:checked="${post.enableComments}">
+                            <label class="form-check-label" for="enableComments"> Enable Comments</label>                        
+                        </div>      
+                    </div>
+                    <div class="form-group">
+                        <h4>Enable new comments:</h4>
+                        <div class="form-check">                        
+                            <input type="checkbox" class="form-check-input" id="enableNewComments" name="enableNewComments" th:field="*{enableNewComments}" th:checked="${post.enableNewComments}">
+                            <label class="form-check-label" for="enableNewComments"> Enable new comments</label>                        
+                        </div>      
+                    </div>
+                    <div class="form-group">
+                        <h4>Summary</h4>
+                        <textarea id="metaSummary" cols="30" rows="5" class="form-control" th:field="*{metaSummary}" th:value="${post.metaSummary}">                            
+                        </textarea>
+                        <p 
+                            th:if="${#fields.hasErrors('metaSummary')}" 
+                            th:errors="*{metaSummary}"
+                            class="alert alert-danger"
+                            role="alert"
+                        >Summary error</p>
+                    </div>
+                    <div class="form-group">
+                        <h4>Thumbnail:</h4>                    
+                        <img id="thumbnailPreview" class="img-fluid rounded w-10" 
+                        th:src="${post.featuredImage}" alt="Img"> 
+                        <p 
+                            th:if="${#fields.hasErrors('featuredImage')}" 
+                            th:errors="*{featuredImage}"
+                            class="alert alert-danger"
+                            role="alert"
+                        >Thumbnail error</p>
+                    </div>
+                    <div class="form-group">
+                        <h4>Image Credit</h4>
+                        <input type="text" class="form-control" id="imageCredit" name="imageCredit" 
+                        th:field="*{imageCredit}" th:value="${post.imageCredit}">
+                        <p 
+                            th:if="${#fields.hasErrors('imageCredit')}" 
+                            th:errors="*{imageCredit}"
+                            class="alert alert-danger"
+                            role="alert"
+                        >Image credit error</p>
+                    </div>
+                    <div class="form-group">
+                        <input id="thumbnailInput" type="file" name="file" style="display:none;">
+                        <label class = "btn btn-primary" for="thumbnailInput">Select Image</label>
+                    </div>
+                    <div class="form-group">
+                        <h4>Content</h4>
+                        <textarea id="editor" cols="30" rows="5" class="form-control" th:field="*{content}" th:utext="${post.content}"></textarea>
+                        <p 
+                            th:if="${#fields.hasErrors('content')}" 
+                            th:errors="*{content}"
+                            class="alert alert-danger"
+                            role="alert"
+                        >Body error</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <h4>Post Categories</h4>
+                        <div class="form-check" th:each="category : ${allCategories}">
+                            <input class="form-check-input" type="checkbox" th:field="*{categories}" th:value="${category.categoryId}" />
+                            <label class="form-check-label" th:text="${category.categoryName}">Heating</label>
+                            <p 
+                            th:if="${#fields.hasErrors('categories')}" 
+                            th:errors="*{categories}"
+                            class="alert alert-danger"
+                            role="alert"
+                        >Categories error</p>
+                        </div>                        
+                    </div>
+
+                    <div class="form-group">
+                        <h4>Post Tags</h4>
+                        <div class="form-check" th:each="tag : ${allTags}">
+                            <input class="form-check-input" type="checkbox" th:field="*{tags}" th:value="${tag.tagId}" />
+                            <label class="form-check-label" th:text="${tag.tagName}">Heating</label>
+                            <p 
+                            th:if="${#fields.hasErrors('tags')}" 
+                            th:errors="*{tags}"
+                            class="alert alert-danger"
+                            role="alert"
+                        >Tags error</p>
+                        </div>                        
+                    </div>
+
+                    <h4>Parent Post</h4>
+                    <div class="form-group">
+                        <select th:field="*{parentPost}">
+                            <option value="0">select option</option>
+                            <option th:each="post : ${allPosts}" 
+                                    th:value="${post.postId}" 
+                                    th:text="${post.title}">Wireframe</option>
+                        </select>                        
+                    </div>                    
+                    <div class="form-group">
+                        <input type="submit" value="Save changes" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Edit Post End -->
+</body>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<script th:src="@{/js/blog.js}"></script>

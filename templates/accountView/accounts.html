@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head}"></head>
+
+
+<header th:replace="~{fragments/headerBlog :: header}"></header>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="51">
+    
+    <!-- Page Title Start -->
+    <div class="container-fluid pt-5 mt-5" id="blog">
+        <div class="container">
+            <div class="position-relative d-flex align-items-center justify-content-center">
+                <h1 class="display-t text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">Accounts</h1>
+                <h1 class="position-absolute text-uppercase text-primary">Accounts</h1>
+            </div>
+        </div>
+    </div>
+    <!-- Page Title End -->
+
+    <!-- Blog List Start -->
+    <div class="container bg-white pt-5">
+
+        <!-- Blog item Start-->
+
+        <table class="table table-hover table-responsive">
+            <thead>
+                <tr>
+                    <th>profile picture</th>
+                    <th>Firs name</th>                    
+                    <th>email</th>                    
+                    <th>Registered at</th>
+                    <th>Last login</th>
+                    <th>Roles</th>
+                    <th>Disabled</th>
+                    <th></th>
+                </tr>                
+            </thead>
+            <tbody>
+                <tr th:each="account, iterator : ${accounts}">
+                    <td><img class="img-fluid mb-4 mb-md-0" th:src="${account.profilePicture}" alt="Image"></td>
+                    <td th:text="${account.fullName()}"></td>
+                    <td th:text="${account.email}"></td>
+                    <td th:text="${#temporals.format(account.registeredAt, 'yyyy-MM-dd@HH:mm')}"></td>
+                    <td th:text="${#temporals.format(account.lastLogin, 'yyyy-MM-dd@HH:mm')}"></td>
+                    <td th:text="${account.roles()}"></td>
+                    <td th:text="${account.disabled}"></td>
+                    <td>
+                        <!-- Circular dropdown menu start -->
+                        <div class="col-md-7">
+                            <span class="d-flex justify-content-between dropdown">                    
+                                <span class="dropdown" id="dropdownMenu" data-toggle="dropdown">
+                                    <button class="btn-social btn btn-light" type="button"  aria-haspopup="true" aria-expanded="false">                       
+                                        <i class="fa fa-ellipsis-v"  ></i>
+                                    </button>
+                                </span>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                                    <a class="dropdown-item" th:href="@{'/accounts/' + ${account.accountId} + '/edit'}"
+                                    sec:authorize="@securityService.hasPrivilege('EDIT_USERS')">Edit <i class="fa fa-eye"></i></a>                                               
+                                    <a class="dropdown-item" data-toggle="modal" th:data-target="'#modal'+${iterator.index}"
+                                    sec:authorize="@securityService.hasPrivilege('DELETE_USERS')">Delete <i class="fa fa-trash"></i></a>
+                                </div>                                        
+                            </span>       
+                            <!-- modal section  -->
+                            <div class="modal fade" th:id="modal+${iterator.index}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Danger</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <a th:href="@{'/accounts/' + ${account.accountId} + '/delete'}"
+                                            class="btn btn-danger btn-lg active" 
+                                            role="button" 
+                                            aria-pressed="true" 
+                                            >Delete</a>     
+                                        </div>    
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end of modal section -->
+                        </div>
+                        <!-- End of circular dropdawn menu -->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        
+
+    </div>
+    <!-- Blog List End -->
+
+
+</body>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<script th:src="@{/js/blog.js}"></script>
+
+
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head}"></head>
+
+
+<header th:replace="~{fragments/headerBlog :: header}"></header>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="51">
+    <!-- Page Header Start -->
+    <div class="container-fluid pt-5" id="blog">
+        
+    </div>
+    <!-- Page Header End -->
+    <!-- Page Title Start -->
+    <div class="container-fluid pt-5" id="blog">
+        <div class="container">
+            <div class="position-relative d-flex align-items-center justify-content-center">
+                <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">Tags</h1>
+                <h1 class="position-absolute text-uppercase text-primary">Tags</h1>
+            </div>
+        </div>
+    </div>
+    <!-- Page Title End -->
+
+    <!-- Tag List Start -->
+    <div class="container bg-white pt-5">
+
+        <!-- Tag item Start-->
+        <div class="row blog-item px-3 pb-5" th:each="tag, iterator : ${tags}">
+            <div class="col-md-5">
+                <img class="img-fluid mb-4 mb-md-0" th:src="${tag.thumbnail}" alt="Image">
+            </div>
+            <div class="col-md-7">
+                <span class="d-flex justify-content-between dropdown">
+                    <h3 class="mb-3 font-weight-bold my-auto" th:text="${tag.tagName}">Lorem ipsum dolor sit amet</h3>
+                    <button 
+                        type="button" 
+                        class="dropdown btn btn-light btn-social" 
+                        id="dropdownMenu" 
+                        data-toggle="dropdown" 
+                        aria-haspopup="true" 
+                        aria-expanded="false"
+                    >                       
+                        <i class="fa fa-ellipsis-v"  ></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                        <a class="dropdown-item" th:href="@{'/blog/tags/' + ${tag.slug}}">See more <i class="fa fa-eye"></i></a>
+                        <a class="dropdown-item" th:href="@{'/blog/tags/' + ${tag.tagId} + '/edit'}"
+                            sec:authorize="@securityService.hasPrivilege('MANAGE_CATEGORIES')"
+                            >Edit <i class="fa fa-pen"></i>
+                        </a>
+
+                        <a class="dropdown-item" th:href="@{'/blog/tags/create'}"
+                            sec:authorize="@securityService.hasPrivilege('MANAGE_CATEGORIES')"
+                            >Add <i class="fa fa-plus"></i>
+                        </a>
+
+                        <a class="dropdown-item" data-toggle="modal" 
+                            th:data-target="'#modal'+${iterator.index}"
+                            sec:authorize="@securityService.hasPrivilege('MANAGE_CATEGORIES')"
+                            >Delete <i class="fa fa-trash"></i>
+                        </a>
+                    </div>                                        
+                </span>
+
+                
+                    <p class=" text-justify" th:text="${tag.tagDescription}">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu suscipit orci velit id libero
+                    </p>
+                <!-- modal section  -->
+                <div class="modal fade" th:id="modal+${iterator.index}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Danger</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <a th:href="@{'/blog/tags/' + ${tag.tagId} + '/delete'}"
+                                class="btn btn-danger btn-lg active" 
+                                role="button" 
+                                aria-pressed="true" 
+                                >Delete</a>     
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+                <!-- end of modal section -->
+            </div>
+
+        </div>
+        <!-- Tag item End-->
+
+    </div>
+    <!-- Tag List End -->
+
+
+</body>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<script th:src="@{/js/blog.js}"></script>
+
+
+</html>
