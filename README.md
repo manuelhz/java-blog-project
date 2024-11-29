@@ -1,5 +1,6 @@
 # Java Blog Project Documentation: Portfolio Website with Dynamic Blog Functionality
-
+Website: [here][1]
+[1]: https://www.coursera.org/learn/introduction-to-algorithms](http://www.bytebounty.co.uk/blog/posts/
 ## 1. Introduction
 
 This document outlines the development of a portfolio website featuring a dynamic blog section. The website is divided into distinct pages: Home, About, Qualifications, Experience, Skills, Portfolio, and Contact. While the Portfolio page is static, the Contact form utilizes Java for email functionality. The blog section, however, is a dynamic website, providing a platform for sharing content and engaging with visitors. 
