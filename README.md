@@ -1,5 +1,7 @@
 # Java Blog Project Documentation: Portfolio Website with Dynamic Blog Functionality
-Website: [here][1]
+Website: [Here][1]
+
+[1]: http://www.bytebounty.co.uk/blog/posts/
 
 ## 1. Introduction
 
@@ -55,4 +57,4 @@ To expedite development and maintain a professional aesthetic, two templates fro
 Throughout development, challenges arose, such as integrating the Summernote Editor effectively, particularly its capability for photo uploads without triggering deletions when necessary. Future objectives include refining this functionality to enhance user experience and creating additional features, such as subscribing to newsletters and automatic email notifications for comments.
 
 Further improvements are also planned for the hierarchical roles implementation in Spring Boot. Enhancing the comments section and introducing modal functionalities will significantly improve user engagement. Additionally, transitioning to Docker Swarm for deployment could enhance scalability.
-[1]: http://www.bytebounty.co.uk/blog/posts/
+
